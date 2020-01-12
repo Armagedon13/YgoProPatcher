@@ -5,18 +5,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace YgoProPatcher
+namespace YgoProEsPatcher
 {
     static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// Punto de entrada principal para la aplicación.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            
-            using(Mutex mutex = new Mutex(false, "Global\\" + appGuid))
+            using (Mutex mutex = new Mutex(false, "Global\\" + appGuid))
             {
                 if (!mutex.WaitOne(0, false))
                 {
@@ -27,7 +26,7 @@ namespace YgoProPatcher
                 Application.SetCompatibleTextRenderingDefault(false);
                 try
                 {
-                    Application.Run(new YgoProPatcher());
+                    Application.Run(new YgoProEsPatcher());
                 }
                 catch (Exception e)
                 {
@@ -35,6 +34,7 @@ namespace YgoProPatcher
                 }
             }
         }
-        private static readonly string appGuid = "52e921b8-bdb9-44ae-87bd-fcbd1178d991";
+        private static readonly string appGuid = "50d03ea6-81a4-4c8e-a2fa-8bb86606608e";
     }
+    
 }

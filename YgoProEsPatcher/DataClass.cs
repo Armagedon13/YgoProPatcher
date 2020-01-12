@@ -2,8 +2,7 @@
 using System.Data.SQLite;
 using System.Windows.Forms;
 
-
-namespace YgoProPatcher
+namespace YgoProEsPatcher
 {
     class DataClass
     {
@@ -27,12 +26,11 @@ namespace YgoProPatcher
             }
             catch (SQLiteException ex)
             {
-                MessageBox.Show("Can't open the DB: "+ex.ToString());
+                MessageBox.Show("Can't open the DB: " + ex.ToString());
             }
             sqlite.Close();
             return dt;
         }
 
     }
-   
 }

@@ -5,10 +5,11 @@ using System.Media;
 using System.Windows.Forms;
 using Octokit;
 
-namespace YgoProPatcher
+namespace YgoProEsPatcher
 {
     public class UpdateChecker
     {
+
         public static bool CheckForUpdate()
         {
             try
@@ -43,5 +44,7 @@ namespace YgoProPatcher
             }
             return false;
         }
+
+
     }
 }

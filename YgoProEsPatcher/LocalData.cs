@@ -6,12 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YgoProPatcher
+namespace YgoProEsPatcher
 {
-     public class LocalData
+    public class LocalData
     {
+
         private readonly static string saveLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "YgoProPatcher");
-     static private void CreateDirIfMissing()
+        static private void CreateDirIfMissing()
         {
             if (!Directory.Exists(saveLocation))
             {
@@ -24,7 +25,7 @@ namespace YgoProPatcher
             string saveFile = Path.Combine(saveLocation, fileName);
             if (Directory.Exists(saveLocation) && File.Exists(saveFile))
             {
-               return File.ReadAllLines(saveFile).ToList<string>();
+                return File.ReadAllLines(saveFile).ToList<string>();
             }
             else
             {
@@ -33,7 +34,7 @@ namespace YgoProPatcher
             }
 
         }
-        static public void SaveFile(List<string> List,string fileName)
+        static public void SaveFile(List<string> List, string fileName)
         {
             CreateDirIfMissing();
             File.WriteAllLines(Path.Combine(saveLocation, fileName), List);
@@ -41,7 +42,7 @@ namespace YgoProPatcher
         static public void SaveSHA(List<GitHubCommit> commits)
         {
             List<string> commitSHA = new List<string>();
-            foreach(var commit in commits)
+            foreach (var commit in commits)
             {
                 commitSHA.Add(commit.Sha);
             }

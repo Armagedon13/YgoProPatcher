@@ -6,10 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using LibGit2Sharp;
 
-
-namespace YgoProPatcher
+namespace YgoProEsPatcher
 {
-    static public class YGOPRO2Client
+    static public class YgoProEsCliente
     {
 
         static public void Download(string path)
@@ -18,7 +17,7 @@ namespace YgoProPatcher
             DirectoryInfo directory = new DirectoryInfo(tempFolder);
             try
             {
-                
+
                 if (!directory.Exists)
                 {
                     directory.Create();
@@ -33,7 +32,7 @@ namespace YgoProPatcher
                     directory.Delete(true);
                 }
 
-                Repository.Clone(GitAccess.GetURLofRepo(Data.YgoProESOwner, "ygopro2"), directory.FullName);
+                Repository.Clone(GitAccess.GetURLofRepo(Data.YgoProESOwner, "YgoproEs-Database"), directory.FullName);
                 DirectoryInfo gitFolder = new DirectoryInfo(Path.Combine(tempFolder, ".git"));
                 if (gitFolder.Exists)
                 {
@@ -47,9 +46,9 @@ namespace YgoProPatcher
                 Copy(tempFolder, path);
                 return;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                System.Windows.Forms.MessageBox.Show("There was an error during the download of the new client. Please try launching this program as an Administrator.\n\nError Code:\n"+e.ToString());
+                System.Windows.Forms.MessageBox.Show("There was an error during the download of the new client. Please try launching this program as an Administrator.\n\nError Code:\n" + e.ToString());
             }
             finally
             {
@@ -59,7 +58,7 @@ namespace YgoProPatcher
                 }
                 directory.Delete(true);
             }
-            
+
         }
 
         static private void Copy(string source_dir, string destination_dir)
@@ -92,7 +91,7 @@ namespace YgoProPatcher
                 }
             }
             DirectoryInfo directory;
-            List<string> directories = new List<string> { "script", "pics","pics/field","picture/card","picture/closeup"};
+            List<string> directories = new List<string> { "script", "pics", "pics/field", "locales/es-ES", "locales/en-US","locales/pt-BR", "locales/pt-US" };
             foreach (string dir in directories)
             {
                 try
@@ -109,6 +108,6 @@ namespace YgoProPatcher
                 }
             }
         }
-        
+
     }
 }

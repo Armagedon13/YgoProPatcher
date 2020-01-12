@@ -1,16 +1,16 @@
-﻿namespace YgoProPatcher
+﻿namespace YgoProEsPatcher
 {
-    partial class YgoProPatcher
+    partial class YgoProEsPatcher
     {
         /// <summary>
-        /// Required designer variable.
+        /// Variable del diseñador necesaria.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Limpiar los recursos que se estén usando.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true si los recursos administrados se deben desechar; false en caso contrario.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,22 +20,22 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Código generado por el Diseñador de Windows Forms
 
         /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// Método necesario para admitir el Diseñador. No se puede modificar
+        /// el contenido de este método con el editor de código.
         /// </summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(YgoProPatcher));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(YgoProEsPatcher));
             this.YGOPRO1PathButton = new System.Windows.Forms.Button();
-            this.YGOPRO2PathButton = new System.Windows.Forms.Button();
+            this.YgoProEsPathButton = new System.Windows.Forms.Button();
             this.YGOPRO1Label = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.YgoProLinksPath = new System.Windows.Forms.TextBox();
-            this.YgoPro2Path = new System.Windows.Forms.TextBox();
+            this.YgoProEsPath = new System.Windows.Forms.TextBox();
             this.UpdateButton = new System.Windows.Forms.Button();
             this.Status = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
@@ -75,18 +75,18 @@
             this.YGOPRO1PathButton.Text = "Select Path";
             this.YGOPRO1PathButton.UseVisualStyleBackColor = true;
             this.YGOPRO1PathButton.Visible = false;
-            this.YGOPRO1PathButton.Click += new System.EventHandler(this.YgoProLinksButton_Click);
+            //this.YGOPRO1PathButton.Click += new System.EventHandler(this.YgoProLinksButton_Click);
             // 
-            // YGOPRO2PathButton
+            // YgoProEsPathButton
             // 
-            this.YGOPRO2PathButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.YGOPRO2PathButton.Location = new System.Drawing.Point(525, 28);
-            this.YGOPRO2PathButton.Name = "YGOPRO2PathButton";
-            this.YGOPRO2PathButton.Size = new System.Drawing.Size(100, 23);
-            this.YGOPRO2PathButton.TabIndex = 1;
-            this.YGOPRO2PathButton.Text = "Select Path";
-            this.YGOPRO2PathButton.UseVisualStyleBackColor = true;
-            this.YGOPRO2PathButton.Click += new System.EventHandler(this.YGOPRO2Button_Click);
+            this.YgoProEsPathButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.YgoProEsPathButton.Location = new System.Drawing.Point(525, 28);
+            this.YgoProEsPathButton.Name = "YgoProEsPathButton";
+            this.YgoProEsPathButton.Size = new System.Drawing.Size(100, 23);
+            this.YgoProEsPathButton.TabIndex = 1;
+            this.YgoProEsPathButton.Text = "Select Path";
+            this.YgoProEsPathButton.UseVisualStyleBackColor = true;
+            this.YgoProEsPathButton.Click += new System.EventHandler(this.YgoProEsButton_Click);
             // 
             // YGOPRO1Label
             // 
@@ -118,19 +118,19 @@
             this.YgoProLinksPath.TabIndex = 4;
             this.YgoProLinksPath.Visible = false;
             // 
-            // YgoPro2Path
+            // YgoProEsPath
             // 
-            this.YgoPro2Path.Location = new System.Drawing.Point(159, 31);
-            this.YgoPro2Path.Name = "YgoPro2Path";
-            this.YgoPro2Path.Size = new System.Drawing.Size(360, 20);
-            this.YgoPro2Path.TabIndex = 5;
+            this.YgoProEsPath.Location = new System.Drawing.Point(159, 31);
+            this.YgoProEsPath.Name = "YgoProEsPath";
+            this.YgoProEsPath.Size = new System.Drawing.Size(360, 20);
+            this.YgoProEsPath.TabIndex = 5;
             // 
             // UpdateButton
             // 
             this.UpdateButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.UpdateButton.Font = new System.Drawing.Font("MS Reference Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.UpdateButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.UpdateButton.Location = new System.Drawing.Point(225, 224);
+            this.UpdateButton.Location = new System.Drawing.Point(225, 222);
             this.UpdateButton.Name = "UpdateButton";
             this.UpdateButton.Size = new System.Drawing.Size(182, 82);
             this.UpdateButton.TabIndex = 0;
@@ -216,7 +216,7 @@
             // exitButton
             // 
             this.exitButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.exitButton.Location = new System.Drawing.Point(225, 383);
+            this.exitButton.Location = new System.Drawing.Point(225, 409);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(182, 23);
             this.exitButton.TabIndex = 15;
@@ -426,11 +426,11 @@
             this.Controls.Add(this.internetCheckbox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.progressBar);
-            this.Controls.Add(this.YgoPro2Path);
+            this.Controls.Add(this.YgoProEsPath);
             this.Controls.Add(this.YgoProLinksPath);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.YGOPRO1Label);
-            this.Controls.Add(this.YGOPRO2PathButton);
+            this.Controls.Add(this.YgoProEsPathButton);
             this.Controls.Add(this.YGOPRO1PathButton);
             this.Controls.Add(this.UpdateButton);
             this.Controls.Add(this.FinishButton);
@@ -454,11 +454,11 @@
         #endregion
 
         private System.Windows.Forms.Button YGOPRO1PathButton;
-        private System.Windows.Forms.Button YGOPRO2PathButton;
+        private System.Windows.Forms.Button YgoProEsPathButton;
         private System.Windows.Forms.Label YGOPRO1Label;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox YgoProLinksPath;
-        private System.Windows.Forms.TextBox YgoPro2Path;
+        private System.Windows.Forms.TextBox YgoProEsPath;
         private System.Windows.Forms.Button UpdateButton;
         private System.Windows.Forms.Label Status;
         private System.Windows.Forms.ProgressBar progressBar;
@@ -486,3 +486,4 @@
         private System.Windows.Forms.Label label5;
     }
 }
+
