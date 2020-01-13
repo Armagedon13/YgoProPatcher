@@ -40,6 +40,7 @@ namespace YgoProEsPatcher
             string version = Data.version;
             footerLabel.Text += version;
             CheckForNewVersionOfPatcher(version);
+            gitHubDownloadCheckbox.Enabled = false;
 
 
             if (!File.Exists(YgoProEsPath.Text+"/YGOProES.exe"))

@@ -67,7 +67,7 @@
             // 
             this.YGOPRO1PathButton.Enabled = false;
             this.YGOPRO1PathButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.YGOPRO1PathButton.Location = new System.Drawing.Point(525, 73);
+            this.YGOPRO1PathButton.Location = new System.Drawing.Point(525, 67);
             this.YGOPRO1PathButton.Name = "YGOPRO1PathButton";
             this.YGOPRO1PathButton.Size = new System.Drawing.Size(100, 23);
             this.YGOPRO1PathButton.TabIndex = 0;
@@ -90,7 +90,7 @@
             // 
             this.YGOPRO1Label.AutoSize = true;
             this.YGOPRO1Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.YGOPRO1Label.Location = new System.Drawing.Point(9, 79);
+            this.YGOPRO1Label.Location = new System.Drawing.Point(9, 73);
             this.YGOPRO1Label.Name = "YGOPRO1Label";
             this.YGOPRO1Label.Size = new System.Drawing.Size(141, 17);
             this.YGOPRO1Label.TabIndex = 2;
@@ -110,7 +110,7 @@
             // YgoProLinksPath
             // 
             this.YgoProLinksPath.Enabled = false;
-            this.YgoProLinksPath.Location = new System.Drawing.Point(159, 78);
+            this.YgoProLinksPath.Location = new System.Drawing.Point(159, 70);
             this.YgoProLinksPath.Name = "YgoProLinksPath";
             this.YgoProLinksPath.Size = new System.Drawing.Size(360, 20);
             this.YgoProLinksPath.TabIndex = 4;
@@ -174,7 +174,7 @@
             this.internetCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.internetCheckbox.Enabled = false;
             this.internetCheckbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.internetCheckbox.Location = new System.Drawing.Point(12, 130);
+            this.internetCheckbox.Location = new System.Drawing.Point(12, 112);
             this.internetCheckbox.Name = "internetCheckbox";
             this.internetCheckbox.Size = new System.Drawing.Size(398, 21);
             this.internetCheckbox.TabIndex = 11;
@@ -203,7 +203,7 @@
             this.gitHubDownloadCheckbox.Checked = true;
             this.gitHubDownloadCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.gitHubDownloadCheckbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gitHubDownloadCheckbox.Location = new System.Drawing.Point(12, 171);
+            this.gitHubDownloadCheckbox.Location = new System.Drawing.Point(12, 144);
             this.gitHubDownloadCheckbox.Name = "gitHubDownloadCheckbox";
             this.gitHubDownloadCheckbox.Size = new System.Drawing.Size(375, 21);
             this.gitHubDownloadCheckbox.TabIndex = 13;
@@ -214,7 +214,7 @@
             // exitButton
             // 
             this.exitButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.exitButton.Location = new System.Drawing.Point(225, 409);
+            this.exitButton.Location = new System.Drawing.Point(225, 383);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(182, 23);
             this.exitButton.TabIndex = 15;
@@ -227,7 +227,7 @@
             // 
             this.OverwriteCheckbox.AutoSize = true;
             this.OverwriteCheckbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.OverwriteCheckbox.Location = new System.Drawing.Point(12, 198);
+            this.OverwriteCheckbox.Location = new System.Drawing.Point(12, 172);
             this.OverwriteCheckbox.Name = "OverwriteCheckbox";
             this.OverwriteCheckbox.Size = new System.Drawing.Size(153, 38);
             this.OverwriteCheckbox.TabIndex = 16;
@@ -246,7 +246,7 @@
             // 
             this.ReinstallCheckbox.AutoSize = true;
             this.ReinstallCheckbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Underline);
-            this.ReinstallCheckbox.Location = new System.Drawing.Point(12, 242);
+            this.ReinstallCheckbox.Location = new System.Drawing.Point(12, 216);
             this.ReinstallCheckbox.Name = "ReinstallCheckbox";
             this.ReinstallCheckbox.Size = new System.Drawing.Size(197, 38);
             this.ReinstallCheckbox.TabIndex = 19;
