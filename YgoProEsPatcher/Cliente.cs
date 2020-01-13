@@ -40,6 +40,29 @@ namespace YgoProEsPatcher
             string version = Data.version;
             footerLabel.Text += version;
             CheckForNewVersionOfPatcher(version);
+
+
+            if (!File.Exists("YGOProES.exe"))
+            {
+                YgoProEsCliente.Download(YgoProEsPath.Text);
+            }
+
+            DeleteOldCdbs();
+            if (!gitHubDownloadCheckbox.Checked)
+            {
+                /*if (threadRunning) { Copy("cdb"); ; }
+                if (threadRunning) { Copy("script"); }
+                if (threadRunning) { Copy("script2"); }
+                if (threadRunning) { Copy("pic"); ; }*/
+            }
+            else
+            {
+                if (threadRunning)
+                {
+                    GitHubDownload(YgoProEsPath.Text);
+                }
+            }
+
         }
 
         //timer
@@ -126,14 +149,13 @@ namespace YgoProEsPatcher
             {
                 if (versionOfYGO == "YGOProES")
                 {
-                    YgoProEsPath.Text = fbd.SelectedPath;
+                     YgoProEsPath.Text = fbd.SelectedPath;
+                   
                 }
-                else
+               /* else
                 {
                     //YgoProLinksPath.Text = fbd.SelectedPath;
-                }
-
-
+                }*/
             }
 
             return folderString;
@@ -222,9 +244,8 @@ namespace YgoProEsPatcher
         {
             if (ReinstallCheckbox.Checked)
             {
-
                 Status.Invoke(new Action(() => {
-                    Status.Text = "Reinstalling YGOPro2, please be patient, this may take a while!";
+                    Status.Text = "Reinstalling YGOProEs, please be patient, this may take a while!";
                     cancelButton.Visible = false;
                     progressBar.Visible = false;
                 }));
@@ -271,13 +292,13 @@ namespace YgoProEsPatcher
 
             List<string> listOfCDBs = GitAccess.GetAllFilesWithExtensionFromYGOPRO("/", ".cdb");
             string cdbFolder = Path.Combine(destinationFolder, "locales/es-ES");
-            if (!await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CBD/raw/master/", true))
+            if (!await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
             {
-                await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CBD/raw/master/", true);
+                await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true);
             }
             progressBar.Invoke(new Action(() => progressBar.Maximum = listOfCDBs.Count));
             List<string> listOfDownloadedCDBS = new List<string>() { Path.Combine(cdbFolder, "cards.cdb") };
-            if (await FileDownload("prerelease-nfw.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CBD/raw/master/", true))
+            if (await FileDownload("prerelease-nfw.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
             {
                 listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, "prerelease-nfw.cdb"));
             }
@@ -369,7 +390,7 @@ namespace YgoProEsPatcher
                 FileInfo[] cdbFiles = new DirectoryInfo(cdbFolder).GetFiles();
                 foreach (FileInfo cdb in cdbFiles)
                 {
-                    if (cdb.Name.Contains("prerelease") || cdb.Name.Contains("fix"))
+                    if (cdb.Name.Contains("prerelease"))
                     {
                         cdb.Delete();
                     }
@@ -377,7 +398,7 @@ namespace YgoProEsPatcher
             }
             catch (Exception e)
             {
-                MessageBox.Show("Access to YGOPro2 denied. Check if the path is correct or\ntry launching the patcher with admin privileges.\n\nError Code:\n" + e.ToString());
+                MessageBox.Show("Access to YGOProEs denied. Check if the path is correct or\ntry launching the patcher with admin privileges.\n\nError Code:\n" + e.ToString());
                 threadRunning = false;
                 cancelButton.Visible = false;
 
@@ -441,7 +462,7 @@ namespace YgoProEsPatcher
             }
         }
 
-        //Boron de finalizado
+        //Boton de finalizado
         private void FinishButton_Click(object sender, EventArgs e)
         {
             try
@@ -618,10 +639,6 @@ namespace YgoProEsPatcher
             }
 
         }
-
-
-
-
 
     }
 

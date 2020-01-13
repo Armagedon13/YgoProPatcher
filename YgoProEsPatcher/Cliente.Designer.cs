@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(YgoProEsPatcher));
             this.YGOPRO1PathButton = new System.Windows.Forms.Button();
             this.YgoProEsPathButton = new System.Windows.Forms.Button();
             this.YGOPRO1Label = new System.Windows.Forms.Label();
@@ -75,7 +74,6 @@
             this.YGOPRO1PathButton.Text = "Select Path";
             this.YGOPRO1PathButton.UseVisualStyleBackColor = true;
             this.YGOPRO1PathButton.Visible = false;
-            //this.YGOPRO1PathButton.Click += new System.EventHandler(this.YgoProLinksButton_Click);
             // 
             // YgoProEsPathButton
             // 
@@ -399,7 +397,7 @@
             this.label5.TabIndex = 32;
             this.label5.Text = "Edited by Armagedon13.";
             // 
-            // YgoProPatcher
+            // YgoProEsPatcher
             // 
             this.AcceptButton = this.UpdateButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -437,9 +435,8 @@
             this.Controls.Add(this.Status);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "YgoProPatcher";
+            this.Name = "YgoProEsPatcher";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "YGOProES Updater";
