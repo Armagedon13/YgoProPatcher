@@ -42,24 +42,24 @@ namespace YgoProEsPatcher
             CheckForNewVersionOfPatcher(version);
 
 
-            if (!File.Exists("YGOProES.exe"))
+            if (!File.Exists(YgoProEsPath.Text+"/YGOProES.exe"))
             {
                 YgoProEsCliente.Download(YgoProEsPath.Text);
-            }
 
-            DeleteOldCdbs();
-            if (!gitHubDownloadCheckbox.Checked)
-            {
-                /*if (threadRunning) { Copy("cdb"); ; }
-                if (threadRunning) { Copy("script"); }
-                if (threadRunning) { Copy("script2"); }
-                if (threadRunning) { Copy("pic"); ; }*/
-            }
-            else
-            {
-                if (threadRunning)
+                DeleteOldCdbs();
+                if (!gitHubDownloadCheckbox.Checked)
                 {
-                    GitHubDownload(YgoProEsPath.Text);
+                    /*if (threadRunning) { Copy("cdb"); ; }
+                    if (threadRunning) { Copy("script"); }
+                    if (threadRunning) { Copy("script2"); }
+                    if (threadRunning) { Copy("pic"); ; }*/
+                }
+                else
+                {
+                    if (threadRunning)
+                    {
+                        GitHubDownload(YgoProEsPath.Text);
+                    }
                 }
             }
 

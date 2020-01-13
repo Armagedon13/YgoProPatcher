@@ -17,8 +17,7 @@ namespace YgoProEsPatcher
         [STAThread]
         static void Main()
         {
-            
-                using (Mutex mutex = new Mutex(false, "Global\\" + appGuid))
+            using (Mutex mutex = new Mutex(false, "Global\\" + appGuid))
             {
                 if (!mutex.WaitOne(0, false))
                 {
