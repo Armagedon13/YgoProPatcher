@@ -299,15 +299,19 @@ namespace YgoProEsPatcher
             }
             progressBar.Invoke(new Action(() => progressBar.Maximum = listOfCDBs.Count));
             List<string> listOfDownloadedCDBS = new List<string>() { Path.Combine(cdbFolder, "cards.cdb") };
-            if (await FileDownload("prerelease-nfw.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
+            if (await FileDownload("prerelease.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
             {
-                listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, "prerelease-nfw.cdb"));
+                listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, "prerelease.cdb"));
+            }
+            if (await FileDownload("preupdate.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
+            {
+                listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, "preupdate.cdb"));
             }
             List<Task> downloadList = new List<Task>();
             foreach (string cdb in listOfCDBs)
             {
 
-                await FileDownload(cdb, cdbFolder, "https://github.com/Amagedon13/YgoProEs-CBD/raw/master/", true);
+                await FileDownload(cdb, cdbFolder, "https://github.com/Amagedon13/YgoProEs-CDB/raw/master/", true);
                 listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, cdb));
                 progressBar.Invoke(new Action(() => progressBar.Increment(1)));
 
@@ -319,15 +323,15 @@ namespace YgoProEsPatcher
             return listOfDownloadedCDBS;
         }
 
-        //Descarga lista e strings
+        //Descarga lista y strings
         private async Task GitHubDownload(string destinationFolder)
         {
-            Status.Invoke(new Action(() => { Status.Text = "Updating card databases from Live2017Links."; }));
+            Status.Invoke(new Action(() => { Status.Text = "Updating card databases from YGOProES CDB."; }));
             List<string> CDBS = new List<string>();
 
             CDBS = await DownloadCDBSFromGithub(destinationFolder);
-            await FileDownload("lflist.conf", Path.Combine(YgoProEsPath.Text, "config"), "https://raw.githubusercontent.com/Armagedon13/YgoProEs-CBD/master/", true);
-            await FileDownload("strings.conf", Path.Combine(YgoProEsPath.Text, "config"), Data.GetStringsWebsite(), true);
+            await FileDownload("lflist.conf", Path.Combine(YgoProEsPath.Text), "https://raw.githubusercontent.com/Armagedon13/YgoProEs-CDB/master/", true);
+            await FileDownload("strings.conf", Path.Combine(YgoProEsPath.Text, "locales/es-ES"), Data.GetStringsWebsite(), true);
             progressBar.Invoke(new Action(() => { progressBar.Value = progressBar.Maximum; }));
 
             //DownloadUsingCDB(CDBS, destinationFolder);

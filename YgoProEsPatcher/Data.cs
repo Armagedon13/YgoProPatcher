@@ -17,13 +17,9 @@ namespace YgoProEsPatcher
         {
             return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-Scripts/";
         }
-        public static string GetLuaWebsite()
-        {
-            return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-Scripts/";
-        }
         public static string GetStringsWebsite()
         {
-            return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-CBD/master/locales/es-ES/";
+            return "https://raw.githubusercontent.com/Armagedon13/YgoProEs-CDB/master/locales/es-ES/";
         }
         public static string YgoProESOwner = "Armagedon13";
         public static string version = "V1.0.0";
