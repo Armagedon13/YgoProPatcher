@@ -52,6 +52,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>84013237.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Costura, Version=3.2.1.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.3.2.1\lib\net40\Costura.dll</HintPath>
@@ -145,6 +148,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="84013237.ico" />
     <Content Include="costura32\git2-4aecb64.dll" />
     <Content Include="costura32\SQLite.Interop.dll" />
     <Content Include="costura64\git2-4aecb64.dll" />

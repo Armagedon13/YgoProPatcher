@@ -24,11 +24,11 @@ namespace YgoProEsPatcher
             UpdateCheckerCooldownCheck();
             _pool = new Semaphore(0, throttleValue);
             _pool.Release(throttleValue);
-            toolTip1.SetToolTip(ReinstallCheckbox, "This will download the newest version of the YGOPro2 Client and install it.\nTHIS OPTION WILL OVERWRITE YOUR SETTINGS AND CUSTOM TEXTURES!");
+            toolTip1.SetToolTip(ReinstallCheckbox, "This will download the newest version of the YGOProEs Client and install it.\nTHIS OPTION WILL OVERWRITE YOUR SETTINGS AND CUSTOM TEXTURES!");
             toolTip1.SetToolTip(OverwriteCheckbox, "This will redownload all of the pictures in your picture folder.");
-            toolTip1.SetToolTip(gitHubDownloadCheckbox, "RECOMMENDED OPTION!\nThis will update your YGOPro2 with the newest cards, pictures.");
-            toolTip1.SetToolTip(YgoProEsPath, "Please select your YGOPro2 directory which contains all the YGOPro2 files.");
-            toolTip1.SetToolTip(YgoProEsPathButton, "Please select your YGOPro2 directory which contains all the YGOPro2 files.");
+            toolTip1.SetToolTip(gitHubDownloadCheckbox, "RECOMMENDED OPTION!\nThis will update your YGOProEs with the newest cards, pictures.");
+            toolTip1.SetToolTip(YgoProEsPath, "Please select your YGOProEs directory which contains all the YGOPro2 files.");
+            toolTip1.SetToolTip(YgoProEsPathButton, "Please select your YGOProEs directory which contains all the YGOProEs files.");
             //toolTip1.SetToolTip(YgoProLinksPath, "Please select your YGOPro Percy directory which contains all the YGOPro Percy files.");
             //toolTip1.SetToolTip(YGOPRO1PathButton, "Please select your YGOPro Percy directory which contains all the YGOPro Percy files.");
             toolTip1.SetToolTip(UpdateButton, "Start updating with the selected options.");
@@ -251,7 +251,7 @@ namespace YgoProEsPatcher
             {
 
                 Status.Invoke(new Action(() => {
-                    notifyIcon1.ShowBalloonTip(6000, "Update complete!", "Click this to launch YGOPro2.", ToolTipIcon.Info);
+                    notifyIcon1.ShowBalloonTip(6000, "Update complete!", "Click this to launch YGOProEs.", ToolTipIcon.Info);
                     notifyIcon1.BalloonTipClicked += FinishButton_Click;
                     Status.Text = "Update complete!"; ReinstallCheckbox.Enabled = true; cancelButton.Visible = false; exitButton.Visible = true; internetCheckbox.Enabled = true; gitHubDownloadCheckbox.Enabled = true; OverwriteCheckbox.Enabled = true; UpdateCheckerButton.Enabled = false;
                     UpdateCheckerTimeNumeric.Enabled = false; UpdateButton.Visible = false; FinishButton.Visible = true; FinishButton.Enabled = true;
@@ -580,7 +580,7 @@ namespace YgoProEsPatcher
                 else if (this.WindowState == FormWindowState.Minimized && notifyIcon1.Visible)
                 {
                     SystemSounds.Hand.Play();
-                    notifyIcon1.ShowBalloonTip(6000, "New update for YGOPro2 available!", "Click this to update!", ToolTipIcon.Info);
+                    notifyIcon1.ShowBalloonTip(6000, "New update for YGOProEs available!", "Click this to update!", ToolTipIcon.Info);
                     notifyIcon1.BalloonTipClicked += UpdateButton_Click;
                 }
             }

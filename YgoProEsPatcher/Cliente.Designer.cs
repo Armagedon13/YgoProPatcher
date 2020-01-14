@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(YgoProEsPatcher));
             this.YGOPRO1PathButton = new System.Windows.Forms.Button();
             this.YgoProEsPathButton = new System.Windows.Forms.Button();
             this.YGOPRO1Label = new System.Windows.Forms.Label();
@@ -435,6 +436,7 @@
             this.Controls.Add(this.Status);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "YgoProEsPatcher";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
