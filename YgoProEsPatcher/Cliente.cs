@@ -309,6 +309,7 @@ namespace YgoProEsPatcher
             CDBS = await DownloadCDBSFromGithub(destinationFolder);
             await FileDownload("lflist.conf", Path.Combine(YgoProEsPath.Text), "https://raw.githubusercontent.com/Armagedon13/YgoproEs-CDB/master/", true);
             await FileDownload("strings.conf", Path.Combine(YgoProEsPath.Text, "locales/es-ES"), Data.GetStringsWebsite(), true);
+            await FileDownload("cards.cdb", Path.Combine(YgoProEsPath.Text), Data.GetStringsWebsite(), true);
             progressBar.Invoke(new Action(() => { progressBar.Value = progressBar.Maximum; }));
 
             DownloadUsingCDB(CDBS, destinationFolder);
