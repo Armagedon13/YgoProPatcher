@@ -330,7 +330,7 @@ namespace YgoProEsPatcher
                         progressBar.Invoke(new Action(() => progressBar.Maximum = (dt.Rows.Count)));
                         progressBar.Invoke(new Action(() => progressBar.Value = 0));
                         string dlWebsitePics = Data.GetPicWebsite();
-                        string dlWebsiteLua = Data.GetBetaLuaWebsite();
+                        string dlWebsiteLua = Data.GetLuaWebsite();
                         string dlWebsiteField = Data.GetFieldWebsite();
                         string dFPics = Path.Combine(destinationFolder, "pics");
                         string dFPicsField = Path.Combine(destinationFolder, "pics/field");
@@ -355,7 +355,7 @@ namespace YgoProEsPatcher
                             if (threadRunning)
                             {
                                 FileDownload(Value.ToString() + ".jpg", dFPics, dlWebsitePics, OverwriteCheckbox.Checked);
-                                //FileDownload("c" + Value.ToString() + ".lua", dFLua, dlWebsiteLua, true);
+                                FileDownload("c" + Value.ToString() + ".lua", dFLua, dlWebsiteLua, true);
                                 //FileDownload(Value.ToString() + ".jpg", dFPicsField, dlWebsiteField, OverwriteCheckbox.Checked);
                                 progressBar.Invoke(new Action(() => progressBar.Increment(1)));
 

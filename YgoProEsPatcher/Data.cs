@@ -17,7 +17,7 @@ namespace YgoProEsPatcher
         {
             return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-Pics-Field/master/";
         }
-        public static string GetBetaLuaWebsite()
+        public static string GetLuaWebsite()
         {
             return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-Scripts/master/";
         }
