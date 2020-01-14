@@ -266,29 +266,29 @@ namespace YgoProEsPatcher
 
             List<string> listOfCDBs = GitAccess.GetAllFilesWithExtensionFromYGOPRO("/", ".cdb");
             string cdbFolder = Path.Combine(destinationFolder, "locales/es-ES");
-            string cdbFolder2 = Path.Combine(destinationFolder);
-            if (!await FileDownload("cards.cdb", cdbFolder, Data.GetStringsWebsite(), true))
+            //string cdbFolder2 = Path.Combine(destinationFolder);
+            if (!await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
             {
-                await FileDownload("cards.cdb", cdbFolder, Data.GetStringsWebsite(), true);             
+                await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true);             
             }
-            if (!await FileDownload("cards.cdb", cdbFolder2, Data.GetStringsWebsite(), true))
+            /*if (!await FileDownload("cards.cdb", cdbFolder2, Data.GetStringsWebsite(), true))
             {
                 await FileDownload("cards.cdb", cdbFolder2, Data.GetStringsWebsite(), true);
-            }
+            }*/
             progressBar.Invoke(new Action(() => progressBar.Maximum = listOfCDBs.Count));
             List<string> listOfDownloadedCDBS = new List<string>() { Path.Combine(cdbFolder, "cards.cdb") };
-            if (await FileDownload("prerelease.cdb", cdbFolder, Data.GetStringsWebsite(), true))
+            if (await FileDownload("prerelease.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
             {
                 listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, "prerelease.cdb"));
             }
-            if (await FileDownload("preupdate.cdb", cdbFolder, Data.GetStringsWebsite(), true))
+            if (await FileDownload("preupdate.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
             {
                 listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, "preupdate.cdb"));
             }
             List<Task> downloadList = new List<Task>();
             foreach (string cdb in listOfCDBs)
             {
-                await FileDownload(cdb, cdbFolder, Data.GetStringsWebsite(), true);
+                await FileDownload(cdb, cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true);
                 listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, cdb));
                 progressBar.Invoke(new Action(() => progressBar.Increment(1)));
 
@@ -307,7 +307,7 @@ namespace YgoProEsPatcher
             List<string> CDBS = new List<string>();
 
             CDBS = await DownloadCDBSFromGithub(destinationFolder);
-            await FileDownload("lflist.conf", Path.Combine(YgoProEsPath.Text), Data.GetStringsWebsite(), true);
+            await FileDownload("lflist.conf", Path.Combine(YgoProEsPath.Text), "https://raw.githubusercontent.com/Armagedon13/YgoproEs-CDB/master/", true);
             await FileDownload("strings.conf", Path.Combine(YgoProEsPath.Text, "locales/es-ES"), Data.GetStringsWebsite(), true);
             progressBar.Invoke(new Action(() => { progressBar.Value = progressBar.Maximum; }));
 
@@ -356,7 +356,7 @@ namespace YgoProEsPatcher
                             {
                                 FileDownload(Value.ToString() + ".jpg", dFPics, dlWebsitePics, OverwriteCheckbox.Checked);
                                 //FileDownload("c" + Value.ToString() + ".lua", dFLua, dlWebsiteLua, true);
-                                FileDownload(Value.ToString() + ".jpg", dFPicsField, dlWebsiteField, OverwriteCheckbox.Checked);
+                                //FileDownload(Value.ToString() + ".jpg", dFPicsField, dlWebsiteField, OverwriteCheckbox.Checked);
                                 progressBar.Invoke(new Action(() => progressBar.Increment(1)));
 
                             }
@@ -377,7 +377,7 @@ namespace YgoProEsPatcher
                 {
                     GitHubClient gitClient = GitAccess.githubAuthorized;
                     string path = "pics/field";
-                    var fields = gitClient.Repository.Content.GetAllContents("Armagedon13", "YgoproEs-Pics", path).Result;
+                    var fields = gitClient.Repository.Content.GetAllContents("Armagedon13", "YgoproEs-Pics-Field").Result;
                     Status.Invoke(new Action(() => { Status.Text = "Downloading field spell pictures."; }));
                     progressBar.Invoke(new Action(() => { progressBar.Maximum = fields.Count; }));
                     foreach (var field in fields)

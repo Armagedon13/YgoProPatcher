@@ -11,7 +11,7 @@ namespace YgoProEsPatcher
 
         public static string GetPicWebsite()
         {
-            return "https://cdn.statically.io/gh/Armagedon13/YgoproEs-Pics/";
+            return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-Pics/master/";
         }
         public static string GetFieldWebsite()
         {
@@ -23,7 +23,7 @@ namespace YgoProEsPatcher
         }
         public static string GetStringsWebsite()
         {
-            return "https://raw.githubusercontent.com/Armagedon13/YgoProEs-CDB/master/";
+            return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-CDB/master/";
         }
         public static string YgoProESOwner = "Armagedon13";
         public static string version = "V1.0.0";
