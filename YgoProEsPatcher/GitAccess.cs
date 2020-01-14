@@ -80,6 +80,7 @@ namespace YgoProEsPatcher
                 githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoproEs-Pics", "HEAD").Result,
                 githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoProEs-CDB", "HEAD").Result,
                 githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoproEs-Database", "HEAD").Result,
+                githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoproEs-Pics-Field", "HEAD").Result,
 
                 //githubAuthorized.Repository.Commit.Get("Szefo09","face","HEAD").Result
             };
