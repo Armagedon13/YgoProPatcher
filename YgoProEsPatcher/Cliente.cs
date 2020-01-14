@@ -43,17 +43,17 @@ namespace YgoProEsPatcher
             gitHubDownloadCheckbox.Enabled = false;
 
 
-            if (!File.Exists(YgoProEsPath.Text+"/YGOProES.exe"))
+           /* if (!File.Exists(YgoProEsPath.Text+"/YGOProES.exe"))
             {
                 YgoProEsCliente.Download(YgoProEsPath.Text);
 
-                DeleteOldCdbs();
+                //DeleteOldCdbs();
                 if (!gitHubDownloadCheckbox.Checked)
                 {
                     /*if (threadRunning) { Copy("cdb"); ; }
                     if (threadRunning) { Copy("script"); }
                     if (threadRunning) { Copy("script2"); }
-                    if (threadRunning) { Copy("pic"); ; }*/
+                    if (threadRunning) { Copy("pic"); ; }
                 }
                 else
                 {
@@ -62,7 +62,7 @@ namespace YgoProEsPatcher
                         GitHubDownload(YgoProEsPath.Text);
                     }
                 }
-            }
+            }*/
 
         }
 
@@ -166,12 +166,12 @@ namespace YgoProEsPatcher
         private async Task<bool> FileDownload(string fileName, string destinationFolder, string website, bool overwrite)
         {
 
-
             string webFile = website + fileName;
             string destFile;
             if (Path.GetExtension(fileName) == ".jpg")
             {
-                destFile = Path.Combine(destinationFolder, Path.ChangeExtension(fileName, ".png"));
+                //destFile = Path.Combine(destinationFolder, Path.ChangeExtension(fileName, ".png"));
+                destFile = Path.Combine(destinationFolder, fileName);
             }
             else
             {
@@ -186,7 +186,7 @@ namespace YgoProEsPatcher
                 {
                     using (var client = new WebClient())
                     {
-                        if (Path.GetExtension(fileName) == ".png")
+                        if (Path.GetExtension(fileName) == ".jpg")
                         {
                             //client.Headers.Add(HttpRequestHeader.Authorization, string.Concat("token ", token));
                         }
@@ -207,7 +207,6 @@ namespace YgoProEsPatcher
             }
             finally
             {
-
                 //debug.Invoke(new Action(() => { debug.Text = downloads.ToString(); }));
             }
 
@@ -243,7 +242,7 @@ namespace YgoProEsPatcher
         //Si reinstalacion esta checkeado
         private async void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (ReinstallCheckbox.Checked)
+            if (ReinstallCheckbox.Checked || !File.Exists(YgoProEsPath.Text + "/YGOProES.exe"))
             {
                 Status.Invoke(new Action(() => {
                     Status.Text = "Reinstalling YGOProEs, please be patient, this may take a while!";
@@ -293,25 +292,29 @@ namespace YgoProEsPatcher
 
             List<string> listOfCDBs = GitAccess.GetAllFilesWithExtensionFromYGOPRO("/", ".cdb");
             string cdbFolder = Path.Combine(destinationFolder, "locales/es-ES");
-            if (!await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
+            string cdbFolder2 = Path.Combine(destinationFolder);
+            if (!await FileDownload("cards.cdb", cdbFolder, Data.GetStringsWebsite(), true))
             {
-                await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true);
+                await FileDownload("cards.cdb", cdbFolder, Data.GetStringsWebsite(), true);
+            }
+            if (!await FileDownload("cards.cdb", cdbFolder2, Data.GetStringsWebsite(), true))
+            {
+                await FileDownload("cards.cdb", cdbFolder2, Data.GetStringsWebsite(), true);
             }
             progressBar.Invoke(new Action(() => progressBar.Maximum = listOfCDBs.Count));
             List<string> listOfDownloadedCDBS = new List<string>() { Path.Combine(cdbFolder, "cards.cdb") };
-            if (await FileDownload("prerelease.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
+            if (await FileDownload("prerelease.cdb", cdbFolder, Data.GetStringsWebsite(), true))
             {
                 listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, "prerelease.cdb"));
             }
-            if (await FileDownload("preupdate.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
+            if (await FileDownload("preupdate.cdb", cdbFolder, Data.GetStringsWebsite(), true))
             {
                 listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, "preupdate.cdb"));
             }
             List<Task> downloadList = new List<Task>();
             foreach (string cdb in listOfCDBs)
             {
-
-                await FileDownload(cdb, cdbFolder, "https://github.com/Amagedon13/YgoProEs-CDB/raw/master/", true);
+                await FileDownload(cdb, cdbFolder, Data.GetStringsWebsite(), true);
                 listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, cdb));
                 progressBar.Invoke(new Action(() => progressBar.Increment(1)));
 
@@ -330,14 +333,25 @@ namespace YgoProEsPatcher
             List<string> CDBS = new List<string>();
 
             CDBS = await DownloadCDBSFromGithub(destinationFolder);
-            await FileDownload("lflist.conf", Path.Combine(YgoProEsPath.Text), "https://raw.githubusercontent.com/Armagedon13/YgoProEs-CDB/master/", true);
+            await FileDownload("lflist.conf", Path.Combine(YgoProEsPath.Text), Data.GetStringsWebsite(), true);
             await FileDownload("strings.conf", Path.Combine(YgoProEsPath.Text, "locales/es-ES"), Data.GetStringsWebsite(), true);
             progressBar.Invoke(new Action(() => { progressBar.Value = progressBar.Maximum; }));
 
             //DownloadUsingCDB(CDBS, destinationFolder);
-
         }
 
+        //Descarga los scripts
+        /*private async Task GitHubDownloadstring(string destinationFolder)
+        {
+            Status.Invoke(new Action(() => { Status.Text = "Updating Scripts YGOProES Scripts."; }));
+            List<string> SCRIPTS = new List<string>();
+
+            SCRIPTS = await DownloadCDBSFromGithub(destinationFolder);
+            await FileDownload(".lua", Path.Combine(YgoProEsPath.Text,"script"), Data.GetBetaLuaWebsite(), true);
+            progressBar.Invoke(new Action(() => { progressBar.Value = progressBar.Maximum; }));
+
+
+        }*/
         //
         private void GitHubDownloadCheckbox_CheckedChanged(object sender, EventArgs e)
         {
@@ -349,7 +363,6 @@ namespace YgoProEsPatcher
             internetCheckbox.Enabled = !internetCheckbox.Enabled;
             if (gitHubDownloadCheckbox.Checked && !internetCheckbox.Checked)
             {
-
                 internetCheckbox.Checked = !internetCheckbox.Checked;
             }
 

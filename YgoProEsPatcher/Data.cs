@@ -11,15 +11,15 @@ namespace YgoProEsPatcher
 
         public static string GetPicWebsite()
         {
-            return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-Pics/";
+            return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-Pics/master/";
         }
         public static string GetBetaLuaWebsite()
         {
-            return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-Scripts/";
+            return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-Scripts/master/";
         }
         public static string GetStringsWebsite()
         {
-            return "https://raw.githubusercontent.com/Armagedon13/YgoProEs-CDB/master/locales/es-ES/";
+            return "https://gitcdn.link/repo/Armagedon13/YgoProEs-CDB/master/";
         }
         public static string YgoProESOwner = "Armagedon13";
         public static string version = "V1.0.0";
