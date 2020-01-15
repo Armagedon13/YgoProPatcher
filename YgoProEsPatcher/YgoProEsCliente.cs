@@ -62,6 +62,59 @@ namespace YgoProEsPatcher
 
         }
 
+        //intento de nuevo para descargar algo la concha de su madre
+        static public void DownloadBot(string path)
+        {
+            string tempFolder1 = Path.Combine(path, "temp1");
+            DirectoryInfo directory = new DirectoryInfo(tempFolder1);
+            try
+            {
+
+                if (!directory.Exists)
+                {
+                    directory.Create();
+                    directory.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+                }
+                else
+                {
+                    foreach (var info in directory.GetFileSystemInfos("*", SearchOption.AllDirectories))
+                    {
+                        info.Attributes = FileAttributes.Normal;
+                    }
+                    directory.Delete(true);
+                }
+
+                Repository.Clone(GitAccess.GetURLofRepo(Data.YgoProESOwner, "YgoproEs-Bot"), directory.FullName);
+                DirectoryInfo gitFolder = new DirectoryInfo(Path.Combine(tempFolder1, ".git"));
+                if (gitFolder.Exists)
+                {
+                    foreach (var info in gitFolder.GetFileSystemInfos("*", SearchOption.AllDirectories))
+                    {
+                        info.Attributes = FileAttributes.Normal;
+                    }
+                    gitFolder.Delete(true);
+                }
+
+                Copy(tempFolder1, path);
+                return;
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show("There was an error during the download of the new client. Please try launching this program as an Administrator.\n\nError Code:\n" + e.ToString());
+            }
+            finally
+            {
+                foreach (var info in directory.GetFileSystemInfos("*", SearchOption.AllDirectories))
+                {
+                    info.Attributes = FileAttributes.Normal;
+                }
+                directory.Delete(true);
+            }
+
+        }
+    
+
+
         static private void Copy(string source_dir, string destination_dir)
         {
 
@@ -92,7 +145,7 @@ namespace YgoProEsPatcher
                 }
             }
             DirectoryInfo directory;
-            List<string> directories = new List<string> { "script", "pics", "pics/field", "locales/es-ES", "locales/en-US","locales/pt-BR", "locales/pt-US" };
+            List<string> directories = new List<string> { "script", "pics", "pics/field", "locales/es-ES", "locales/en-US","locales/pt-BR", "locales/pt-US","WindBot","Windbot/Decks", "Windbot/Dialogs" };
             foreach (string dir in directories)
             {
                 try

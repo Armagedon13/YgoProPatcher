@@ -271,10 +271,6 @@ namespace YgoProEsPatcher
             {
                 await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true);             
             }
-            /*if (!await FileDownload("cards.cdb", cdbFolder2, Data.GetStringsWebsite(), true))
-            {
-                await FileDownload("cards.cdb", cdbFolder2, Data.GetStringsWebsite(), true);
-            }*/
             progressBar.Invoke(new Action(() => progressBar.Maximum = listOfCDBs.Count));
             List<string> listOfDownloadedCDBS = new List<string>() { Path.Combine(cdbFolder, "cards.cdb") };
             if (await FileDownload("prerelease.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
@@ -313,9 +309,10 @@ namespace YgoProEsPatcher
             progressBar.Invoke(new Action(() => { progressBar.Value = progressBar.Maximum; }));
 
             DownloadUsingCDB(CDBS, destinationFolder);
+            YgoProEsCliente.DownloadBot(YgoProEsPath.Text);
         }
 
-        //
+        //Descarga usando los CDB
         private void DownloadUsingCDB(List<string> listOfDownloadedCDBS, string destinationFolder)
         {
             if (threadRunning)
@@ -357,7 +354,7 @@ namespace YgoProEsPatcher
                             {
                                 FileDownload(Value.ToString() + ".jpg", dFPics, dlWebsitePics, OverwriteCheckbox.Checked);
                                 FileDownload("c" + Value.ToString() + ".lua", dFLua, dlWebsiteLua, true);
-                                //FileDownload(Value.ToString() + ".jpg", dFPicsField, dlWebsiteField, OverwriteCheckbox.Checked);
+                                FileDownload(Value.ToString() + ".jpg", dFPicsField, dlWebsiteField, OverwriteCheckbox.Checked);
                                 progressBar.Invoke(new Action(() => progressBar.Increment(1)));
 
                             }
@@ -377,7 +374,7 @@ namespace YgoProEsPatcher
                 if (threadRunning)
                 {
                     GitHubClient gitClient = GitAccess.githubAuthorized;
-                    string path = "pics/field";
+                    //string path = "pics/field";
                     var fields = gitClient.Repository.Content.GetAllContents("Armagedon13", "YgoproEs-Pics-Field").Result;
                     Status.Invoke(new Action(() => { Status.Text = "Downloading field spell pictures."; }));
                     progressBar.Invoke(new Action(() => { progressBar.Maximum = fields.Count; }));
@@ -385,7 +382,7 @@ namespace YgoProEsPatcher
                     {
                         if (threadRunning)
                         {
-                            FileDownload(field.Name, Path.Combine(YgoProEsPath.Text, path), field.DownloadUrl, OverwriteCheckbox.Checked);
+                            FileDownload(field.Name, Path.Combine(YgoProEsPath.Text, "pics/field"), field.DownloadUrl, OverwriteCheckbox.Checked);
                             progressBar.Invoke(new Action(() => { progressBar.Increment(1); }));
                         }
                     }
@@ -393,9 +390,22 @@ namespace YgoProEsPatcher
                     {
                         Thread.Sleep(1);
                     }
+                
+
                 }
+
+                
             }
+           
         }
+
+        //intenta descargar archivos Bot
+        private async Task BotGitHubDownload(string destinationBot)
+        {
+
+
+        }
+
 
 
         //

@@ -272,7 +272,7 @@
             this.FinishButton.Name = "FinishButton";
             this.FinishButton.Size = new System.Drawing.Size(182, 82);
             this.FinishButton.TabIndex = 21;
-            this.FinishButton.Text = "Exit the updater\r\n&&\r\nLaunch YGOPro2.";
+            this.FinishButton.Text = "Exit the updater\r\n&&\r\nLaunch YGOProEs.";
             this.FinishButton.UseVisualStyleBackColor = false;
             this.FinishButton.Visible = false;
             this.FinishButton.Click += new System.EventHandler(this.FinishButton_Click);
