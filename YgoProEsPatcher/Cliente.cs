@@ -266,21 +266,23 @@ namespace YgoProEsPatcher
 
             List<string> listOfCDBs = GitAccess.GetAllFilesWithExtensionFromYGOPRO("/", ".cdb");
             string cdbFolder = Path.Combine(destinationFolder, "locales/es-ES");
-            //string cdbFolder2 = Path.Combine(destinationFolder);
-            if (!await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
+            /*if (!await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
             {
                 await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true);             
-            }
+            }*/
+            await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true);
+            await FileDownload("prerelease.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true);
+            await FileDownload("preupdate.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true);
             progressBar.Invoke(new Action(() => progressBar.Maximum = listOfCDBs.Count));
             List<string> listOfDownloadedCDBS = new List<string>() { Path.Combine(cdbFolder, "cards.cdb") };
-            if (await FileDownload("prerelease.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
+            /*if (await FileDownload("prerelease.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
             {
                 listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, "prerelease.cdb"));
             }
             if (await FileDownload("preupdate.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
             {
                 listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, "preupdate.cdb"));
-            }
+            }*/
             List<Task> downloadList = new List<Task>();
             foreach (string cdb in listOfCDBs)
             {
@@ -398,15 +400,6 @@ namespace YgoProEsPatcher
             }
            
         }
-
-        //intenta descargar archivos Bot
-        private async Task BotGitHubDownload(string destinationBot)
-        {
-
-
-        }
-
-
 
         //
         private void GitHubDownloadCheckbox_CheckedChanged(object sender, EventArgs e)
