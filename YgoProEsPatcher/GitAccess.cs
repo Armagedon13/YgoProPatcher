@@ -42,7 +42,7 @@ namespace YgoProEsPatcher
         }
         static public List<string> GetAllFilesWithExtensionFromYGOPRO(string path, string extension)
         {
-            List<RepositoryContent> result = GitAccess.GetRepositoryContent("Armagedon13", "YgoProEs-CDB", path);
+            List<RepositoryContent> result = GitAccess.GetRepositoryContent("Armagedon13", "YgoproEs-CDB-ES", path);
             List<string> fileNames = new List<string>();
             foreach (var c in result)
             {
@@ -79,11 +79,10 @@ namespace YgoProEsPatcher
             {
                 githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoproEs-Pics", "HEAD").Result,
                 githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoProEs-CDB", "HEAD").Result,
+                githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoProEs-CDB-ES", "HEAD").Result,
                 githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoproEs-Database", "HEAD").Result,
                 githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoproEs-Pics-Field", "HEAD").Result,
                 githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoproEs-Bot", "HEAD").Result,
-
-                //githubAuthorized.Repository.Commit.Get("Szefo09","face","HEAD").Result
             };
 
             return commits;

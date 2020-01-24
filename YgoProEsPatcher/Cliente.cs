@@ -266,27 +266,25 @@ namespace YgoProEsPatcher
 
             List<string> listOfCDBs = GitAccess.GetAllFilesWithExtensionFromYGOPRO("/", ".cdb");
             string cdbFolder = Path.Combine(destinationFolder, "locales/es-ES");
-            /*if (!await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
+            /*if (!await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB-ES/raw/master/", true))
             {
-                await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true);             
+                await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB-ES/raw/master/", true);             
             }*/
-            await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true);
-            await FileDownload("prerelease.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true);
-            await FileDownload("preupdate.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true);
+            await FileDownload("cards.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB-ES/raw/master/", true);
             progressBar.Invoke(new Action(() => progressBar.Maximum = listOfCDBs.Count));
             List<string> listOfDownloadedCDBS = new List<string>() { Path.Combine(cdbFolder, "cards.cdb") };
-            /*if (await FileDownload("prerelease.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
+            if (await FileDownload("prerelease.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB-ES/raw/master/", true))
             {
                 listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, "prerelease.cdb"));
             }
-            if (await FileDownload("preupdate.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true))
+            if (await FileDownload("preupdate.cdb", cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB-ES/raw/master/", true))
             {
                 listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, "preupdate.cdb"));
-            }*/
+            }
             List<Task> downloadList = new List<Task>();
             foreach (string cdb in listOfCDBs)
             {
-                await FileDownload(cdb, cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB/raw/master/", true);
+                await FileDownload(cdb, cdbFolder, "https://github.com/Armagedon13/YgoproEs-CDB-ES/raw/master/", true);
                 listOfDownloadedCDBS.Add(Path.Combine(cdbFolder, cdb));
                 progressBar.Invoke(new Action(() => progressBar.Increment(1)));
 
@@ -296,22 +294,6 @@ namespace YgoProEsPatcher
                 Thread.Sleep(1);
             }
             return listOfDownloadedCDBS;
-        }
-
-        //Descarga lista y strings
-        private async Task GitHubDownload(string destinationFolder)
-        {
-            Status.Invoke(new Action(() => { Status.Text = "Updating card databases from YGOProES CDB."; }));
-            List<string> CDBS = new List<string>();
-
-            CDBS = await DownloadCDBSFromGithub(destinationFolder);
-            await FileDownload("lflist.conf", Path.Combine(YgoProEsPath.Text), "https://raw.githubusercontent.com/Armagedon13/YgoproEs-CDB/master/", true);
-            await FileDownload("strings.conf", Path.Combine(YgoProEsPath.Text, "locales/es-ES"), Data.GetStringsWebsite(), true);
-            await FileDownload("cards.cdb", Path.Combine(YgoProEsPath.Text), Data.GetStringsWebsite(), true);
-            progressBar.Invoke(new Action(() => { progressBar.Value = progressBar.Maximum; }));
-
-            DownloadUsingCDB(CDBS, destinationFolder);
-            YgoProEsCliente.DownloadBot(YgoProEsPath.Text);
         }
 
         //Descarga usando los CDB
@@ -356,7 +338,7 @@ namespace YgoProEsPatcher
                             {
                                 FileDownload(Value.ToString() + ".jpg", dFPics, dlWebsitePics, OverwriteCheckbox.Checked);
                                 FileDownload("c" + Value.ToString() + ".lua", dFLua, dlWebsiteLua, true);
-                                FileDownload(Value.ToString() + ".jpg", dFPicsField, dlWebsiteField, OverwriteCheckbox.Checked);
+                                //FileDownload(Value.ToString() + ".jpg", dFPicsField, dlWebsiteField, OverwriteCheckbox.Checked);
                                 progressBar.Invoke(new Action(() => progressBar.Increment(1)));
 
                             }
@@ -401,6 +383,22 @@ namespace YgoProEsPatcher
            
         }
 
+        //Descarga lista y strings
+        private async Task GitHubDownload(string destinationFolder)
+        {
+            Status.Invoke(new Action(() => { Status.Text = "Updating card databases from YGOProES CDB."; }));
+            List<string> CDBS = new List<string>();
+
+            CDBS = await DownloadCDBSFromGithub(destinationFolder);
+            await FileDownload("lflist.conf", Path.Combine(YgoProEsPath.Text), "https://raw.githubusercontent.com/Armagedon13/YgoproEs-CDB-ES/master/", true);
+            await FileDownload("strings.conf", Path.Combine(YgoProEsPath.Text, "locales/es-ES"), Data.GetStringsWebsite(), true);
+            await FileDownload("cards.cdb", Path.Combine(YgoProEsPath.Text), Data.GetStringsWebsite(), true);
+            progressBar.Invoke(new Action(() => { progressBar.Value = progressBar.Maximum; }));
+
+            DownloadUsingCDB(CDBS, destinationFolder);
+            YgoProEsCliente.DownloadBot(YgoProEsPath.Text);
+        }
+
         //
         private void GitHubDownloadCheckbox_CheckedChanged(object sender, EventArgs e)
         {
@@ -440,7 +438,7 @@ namespace YgoProEsPatcher
             {
                 LocalData.SaveFile(new List<string> { StartMinimizedCheckbox.Checked.ToString(), UpdateCheckerTimeNumeric.Value.ToString() }, "AutoStartSettings");
 
-                LocalData.SaveFile(new List<string> { /*YgoProLinksPath.Text, */YgoProEsPath.Text }, "paths.txt");
+                LocalData.SaveFile(new List<string> { YgoProEsPath.Text }, "paths.txt");
             }
             catch
             {
@@ -457,7 +455,7 @@ namespace YgoProEsPatcher
                 FileInfo[] cdbFiles = new DirectoryInfo(cdbFolder).GetFiles();
                 foreach (FileInfo cdb in cdbFiles)
                 {
-                    if (cdb.Name.Contains("prerelease"))
+                    if (cdb.Name.Contains("prerelease") || cdb.Name.Contains("preupdate"))
                     {
                         cdb.Delete();
                     }

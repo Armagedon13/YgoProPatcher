@@ -23,10 +23,10 @@ namespace YgoProEsPatcher
         }
         public static string GetStringsWebsite()
         {
-            return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-CDB/master/";
+            return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-CDB-ES/master/";
         }
         public static string YgoProESOwner = "Armagedon13";
-        public static string version = "V1.0.3";
+        public static string version = "V1.0.4";
 
     }
 }
