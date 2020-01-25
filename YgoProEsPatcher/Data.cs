@@ -30,7 +30,7 @@ namespace YgoProEsPatcher
             return "https://ygoprodeck.com/pics/";
         }
         public static string YgoProESOwner = "Armagedon13";
-        public static string version = "V1.0.5";
+        public static string version = "V1.0.6";
 
     }
 }
