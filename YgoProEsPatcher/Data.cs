@@ -25,8 +25,12 @@ namespace YgoProEsPatcher
         {
             return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-CDB-ES/master/";
         }
+        public static string GetPicsWebWrong()
+        {
+            return "https://ygoprodeck.com/pics/";
+        }
         public static string YgoProESOwner = "Armagedon13";
-        public static string version = "V1.0.4";
+        public static string version = "V1.0.5";
 
     }
 }
