@@ -384,7 +384,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(190, 45);
             this.label3.TabIndex = 31;
-            this.label3.Text = "New Client with Room List\r\navailable! Reinstall to get it!\r\n";
+            this.label3.Text = "New Version 1.035 Reinstall to get it!";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5

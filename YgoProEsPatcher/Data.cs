@@ -11,7 +11,7 @@ namespace YgoProEsPatcher
 
         public static string GetPicWebsite()
         {
-            return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-Pics/master/";
+            return "https://raw.githubusercontent.com/Armagedon13/Ygopro-Pics/master/";
         }
         public static string GetFieldWebsite()
         {
@@ -19,13 +19,13 @@ namespace YgoProEsPatcher
         }
         public static string GetLuaWebsite()
         {
-            return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-Scripts/master/";
+            return "https://raw.githubusercontent.com/Armagedon13/ygopro-scripts/master/";
         }
         public static string GetStringsWebsite()
         {
             return "https://raw.githubusercontent.com/Armagedon13/YgoproEs-CDB-ES/master/";
         }
-        public static string GetPicsWebWrong()
+        public static string GetPicsWebComplete()
         {
             return "https://ygoprodeck.com/pics/";
         }

@@ -7,7 +7,6 @@ using System.Drawing;
 using System.IO;
 using System.Media;
 using System.Net;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -312,8 +311,57 @@ namespace YgoProEsPatcher
                         string dlWebsitePics = Data.GetPicWebsite();
                         string dlWebsiteLua = Data.GetLuaWebsite();
                         string dlWebsiteField = Data.GetFieldWebsite();
-                        string dFPics = Path.Combine(destinationFolder, "pics");
+                        string dFPics = Path.Combine(destinationFolder, @"pics");
                         string dFPicsField = Path.Combine(destinationFolder, "pics/field");
+                        string dFLua = Path.Combine(destinationFolder, "script");
+                        List<string> downloadList = new List<string>();
+
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            if (threadRunning)
+                            {
+                                downloadList.Add(dt.Rows[i][0].ToString());
+                            }
+                            else
+                            {
+                                break;
+                            }
+
+                        }
+                        foreach (string Value in downloadList)
+                        {
+
+                          if (threadRunning)
+                          {
+                              FileDownload(Value.ToString() + ".jpg", dFPics, dlWebsitePics, OverwriteCheckbox.Checked);
+                              //FileDownload(Value.ToString() + ".jpg", dFPics, "https://ygoprodeck.com/pics/", OverwriteCheckbox.Checked);
+                              //FileDownload("c" + Value.ToString() + ".lua", dFLua, dlWebsiteLua, true);  
+                              //FileDownload(Value.ToString() + ".jpg", dFPicsField, dlWebsiteField, OverwriteCheckbox.Checked);
+                              progressBar.Invoke(new Action(() => progressBar.Increment(1)));
+                          }
+                        }
+                        while (downloads > 1 - throttleValue)
+                        {
+                            Thread.Sleep(1);
+                        }
+                    }
+
+                }
+                while (downloads > 1 - throttleValue)
+                {
+                    Thread.Sleep(1);
+                }
+                //new
+                if (threadRunning)
+                {
+                    foreach (string cdb in listOfDownloadedCDBS)
+                    {
+                        DataClass db = new DataClass(cdb);
+                        DataTable dt = db.SelectQuery("SELECT id FROM datas");
+                        Status.Invoke(new Action(() => Status.Text = "Updating scripts using " + Path.GetFileName(cdb)));
+                        progressBar.Invoke(new Action(() => progressBar.Maximum = (dt.Rows.Count)));
+                        progressBar.Invoke(new Action(() => progressBar.Value = 0));
+                        string dlWebsiteLua = Data.GetLuaWebsite();
                         string dFLua = Path.Combine(destinationFolder, "script");
                         List<string> downloadList = new List<string>();
 
@@ -334,30 +382,22 @@ namespace YgoProEsPatcher
 
                             if (threadRunning)
                             {
-                                //FileDownload(Value.ToString() + ".jpg", dFPics, dlWebsitePics, OverwriteCheckbox.Checked);
-                                FileDownload(Value.ToString() + ".jpg", dFPics, "https://ygoprodeck.com/pics/", OverwriteCheckbox.Checked);
-                                FileDownload("c" + Value.ToString() + ".lua", dFLua, dlWebsiteLua, true);   
-                                //FileDownload(Value.ToString() + ".jpg", dFPicsField, dlWebsiteField, OverwriteCheckbox.Checked);
+                                FileDownload("c" + Value.ToString() + ".lua", dFLua, dlWebsiteLua, true);
                                 progressBar.Invoke(new Action(() => progressBar.Increment(1)));
-
                             }
                         }
                         while (downloads > 1 - throttleValue)
                         {
                             Thread.Sleep(1);
                         }
-
                     }
 
-                }
-                while (downloads > 1 - throttleValue)
-                {
-                    Thread.Sleep(1);
+
                 }
                 if (threadRunning)
                 {
                     GitHubClient gitClient = GitAccess.githubAuthorized;
-                    //string path = "pics/field";
+                    string path = "pics/field";
                     var downloadField = gitClient.Repository.Content.GetAllContents("Armagedon13", "YgoproEs-Pics-Field").Result;
                     Status.Invoke(new Action(() => { Status.Text = "Downloading field spell pictures."; }));
                     progressBar.Invoke(new Action(() => { progressBar.Maximum = downloadField.Count; }));
@@ -365,8 +405,7 @@ namespace YgoProEsPatcher
                     {
                         if (threadRunning)
                         {
-                            FileDownload(field.ToString() + ".jpg", Path.Combine(YgoProEsPath.Text, "pics/field"), "https://github.com/Armagedon13/YgoproEs-Pics-Field/raw/master/", OverwriteCheckbox.Checked);
-                            //FileDownload(field.ToString()+".jpg", Path.Combine(YgoProEsPath.Text, "pics/field"), field.DownloadUrl, OverwriteCheckbox.Checked);
+                            FileDownload(field.Name, Path.Combine(YgoProEsPath.Text, path), field.DownloadUrl, OverwriteCheckbox.Checked);
                             progressBar.Invoke(new Action(() => { progressBar.Increment(1); }));
 
                         }
@@ -375,11 +414,9 @@ namespace YgoProEsPatcher
                     {
                         Thread.Sleep(1);
                     }
-                
 
                 }
 
-                
             }
            
         }

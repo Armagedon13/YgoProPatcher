@@ -77,12 +77,12 @@ namespace YgoProEsPatcher
         {
             List<GitHubCommit> commits = new List<GitHubCommit>
             {
-                githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoproEs-Pics", "HEAD").Result,
-                githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoProEs-CDB", "HEAD").Result,
                 githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoProEs-CDB-ES", "HEAD").Result,
                 githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoproEs-Database", "HEAD").Result,
                 githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoproEs-Pics-Field", "HEAD").Result,
                 githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "YgoproEs-Bot", "HEAD").Result,
+                githubAuthorized.Repository.Commit.Get(Data.YgoProESOwner, "ygopro-scripts", "HEAD").Result,
+
             };
 
             return commits;
