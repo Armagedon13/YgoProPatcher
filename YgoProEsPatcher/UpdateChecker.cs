@@ -37,12 +37,15 @@ namespace YgoProEsPatcher
                 {
                     return false;
                 }
+                
             }
+            
             catch (Exception e)
             {
                 MessageBox.Show("Can't check for new updates!\n" + e.ToString());
             }
             return false;
+            
         }
 
 

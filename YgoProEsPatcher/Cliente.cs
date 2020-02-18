@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Media;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -41,6 +42,7 @@ namespace YgoProEsPatcher
             footerLabel.Text += version;
             CheckForNewVersionOfPatcher(version);
             gitHubDownloadCheckbox.Enabled = false;
+            //FieldWeb();
 
         }
 
@@ -126,11 +128,13 @@ namespace YgoProEsPatcher
             DialogResult result = fbd.ShowDialog();
             if (result == DialogResult.OK)
             {
-                if (versionOfYGO == "YGOProES")
+                YgoProEsPath.Text = fbd.SelectedPath;
+                /*if (versionOfYGO == "YGOProES")
                 {
                      YgoProEsPath.Text = fbd.SelectedPath;
                    
                 }
+
                /* else
                 {
                     //YgoProLinksPath.Text = fbd.SelectedPath;
@@ -140,7 +144,7 @@ namespace YgoProEsPatcher
             return folderString;
         }
 
-        //Lo que falla y no se que carajo hace esto
+        //Descargador
         private async Task<bool> FileDownload(string fileName, string destinationFolder, string website, bool overwrite)
         {
 
@@ -293,6 +297,21 @@ namespace YgoProEsPatcher
             return listOfDownloadedCDBS;
         }
 
+        //Genera lista de descarga Field Pics
+        public string GetDirectoryListingRegexForUrl(string url)
+        {
+            if (url.Equals("https://ygoprodeck.com/pics/field/"))
+            {
+                return "<a href=\".*\">(?<name>.*)</a>";
+            }
+            throw new NotSupportedException();
+        }
+
+        public void listOfFieldPics()
+        {
+
+        }
+
         //Descarga usando los CDB
         private void DownloadUsingCDB(List<string> listOfDownloadedCDBS, string destinationFolder)
         {
@@ -313,56 +332,6 @@ namespace YgoProEsPatcher
                         string dlWebsiteField = Data.GetFieldWebsite();
                         string dFPics = Path.Combine(destinationFolder, @"pics");
                         string dFPicsField = Path.Combine(destinationFolder, "pics/field");
-                        string dFLua = Path.Combine(destinationFolder, "script");
-                        List<string> downloadList = new List<string>();
-
-                        for (int i = 0; i < dt.Rows.Count; i++)
-                        {
-                            if (threadRunning)
-                            {
-                                downloadList.Add(dt.Rows[i][0].ToString());
-                            }
-                            else
-                            {
-                                break;
-                            }
-
-                        }
-                        foreach (string Value in downloadList)
-                        {
-
-                          if (threadRunning)
-                          {
-                              FileDownload(Value.ToString() + ".jpg", dFPics, dlWebsitePics, OverwriteCheckbox.Checked);
-                              //FileDownload(Value.ToString() + ".jpg", dFPics, "https://ygoprodeck.com/pics/", OverwriteCheckbox.Checked);
-                              //FileDownload("c" + Value.ToString() + ".lua", dFLua, dlWebsiteLua, true);  
-                              //FileDownload(Value.ToString() + ".jpg", dFPicsField, dlWebsiteField, OverwriteCheckbox.Checked);
-                              progressBar.Invoke(new Action(() => progressBar.Increment(1)));
-                          }
-                        }
-                        while (downloads > 1 - throttleValue)
-                        {
-                            Thread.Sleep(1);
-                        }
-                    }
-
-                }
-                while (downloads > 1 - throttleValue)
-                {
-                    Thread.Sleep(1);
-                }
-                //new
-                if (threadRunning)
-                {
-                    foreach (string cdb in listOfDownloadedCDBS)
-                    {
-                        DataClass db = new DataClass(cdb);
-                        DataTable dt = db.SelectQuery("SELECT id FROM datas");
-                        Status.Invoke(new Action(() => Status.Text = "Updating scripts using " + Path.GetFileName(cdb)));
-                        progressBar.Invoke(new Action(() => progressBar.Maximum = (dt.Rows.Count)));
-                        progressBar.Invoke(new Action(() => progressBar.Value = 0));
-                        string dlWebsiteLua = Data.GetLuaWebsite();
-                        string dFLua = Path.Combine(destinationFolder, "script");
                         List<string> downloadList = new List<string>();
 
                         for (int i = 0; i < dt.Rows.Count; i++)
@@ -382,7 +351,8 @@ namespace YgoProEsPatcher
 
                             if (threadRunning)
                             {
-                                FileDownload("c" + Value.ToString() + ".lua", dFLua, dlWebsiteLua, true);
+                                FileDownload(Value.ToString() + ".jpg", dFPics, "https://storage.googleapis.com/ygoprodeck.com/pics/", OverwriteCheckbox.Checked);
+                                //FileDownload(Value.ToString() + ".jpg", dFPicsField, "https://ygoprodeck.com/pics/field/", OverwriteCheckbox.Checked);
                                 progressBar.Invoke(new Action(() => progressBar.Increment(1)));
                             }
                         }
@@ -391,23 +361,94 @@ namespace YgoProEsPatcher
                             Thread.Sleep(1);
                         }
                     }
-
-
                 }
-                if (threadRunning)
+                while (downloads > 1 - throttleValue)
                 {
-                    GitHubClient gitClient = GitAccess.githubAuthorized;
-                    string path = "pics/field";
-                    var downloadField = gitClient.Repository.Content.GetAllContents("Armagedon13", "YgoproEs-Pics-Field").Result;
-                    Status.Invoke(new Action(() => { Status.Text = "Downloading field spell pictures."; }));
-                    progressBar.Invoke(new Action(() => { progressBar.Maximum = downloadField.Count; }));
-                    foreach (var field in downloadField)
+                    Thread.Sleep(1);
+                }
+            }
+
+            //Download Field Pics
+            if (threadRunning)
+            {
+                //new
+                List<string> listOfFieldPics = new List<string>();
+                string url = "https://ygoprodeck.com/pics/field/";
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                    {
+                        string html = reader.ReadToEnd();
+                        Regex regex = new Regex(GetDirectoryListingRegexForUrl(url));
+                        MatchCollection matches = regex.Matches(html);
+                        
+                        if (matches.Count > 0)
+                        {
+                            foreach (Match match in matches)
+                            {
+                                if (match.Success)
+                                {
+                                    string datas = match.Groups["name"].ToString();
+                                    listOfFieldPics.Add(datas);
+                                    //Console.WriteLine(listOfFieldPics);
+                                    //Console.WriteLine(datas);
+                                    //Console.WriteLine(match.ToString(),"name");
+                                }
+                            }
+                        }
+                    }
+                }
+                Status.Invoke(new Action(() => Status.Text = "Updating pics Field"));
+                progressBar.Invoke(new Action(() => { progressBar.Maximum = listOfFieldPics.Count; }));
+                string data = Path.Combine(destinationFolder, "pics/field");
+                foreach (string fields in listOfFieldPics)
+                {
+                    if (threadRunning)
+                    {
+                        FileDownload(fields.ToString(), data, "https://ygoprodeck.com/pics/field/", false);
+                        progressBar.Invoke(new Action(() => { progressBar.Increment(1); }));
+                    }
+                }
+                while (downloads > 1 - throttleValue)
+                {
+                    Thread.Sleep(1);
+                }
+            }
+
+            //new script downloader
+            if (threadRunning)
+            {
+                foreach (string cdb in listOfDownloadedCDBS)
+                {
+                    DataClass db = new DataClass(cdb);
+                    DataTable dt = db.SelectQuery("SELECT id FROM datas");
+                    Status.Invoke(new Action(() => Status.Text = "Updating scripts using " + Path.GetFileName(cdb)));
+                    progressBar.Invoke(new Action(() => progressBar.Maximum = (dt.Rows.Count)));
+                    progressBar.Invoke(new Action(() => progressBar.Value = 0));
+                    string dlWebsiteLua = Data.GetLuaWebsite();
+                    string dFLua = Path.Combine(destinationFolder, "script");
+                    List<string> downloadList = new List<string>();
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         if (threadRunning)
                         {
-                            FileDownload(field.Name, Path.Combine(YgoProEsPath.Text, path), field.DownloadUrl, OverwriteCheckbox.Checked);
-                            progressBar.Invoke(new Action(() => { progressBar.Increment(1); }));
+                            downloadList.Add(dt.Rows[i][0].ToString());
+                        }
+                        else
+                        {
+                            break;
+                        }
 
+                    }
+                    foreach (string Value in downloadList)
+                    {
+
+                        if (threadRunning)
+                        {
+                            FileDownload("c" + Value.ToString() + ".lua", dFLua, dlWebsiteLua, true);
+                            progressBar.Invoke(new Action(() => progressBar.Increment(1)));
                         }
                     }
                     while (downloads > 1 - throttleValue)
@@ -416,9 +457,12 @@ namespace YgoProEsPatcher
                     }
 
                 }
-
+                while (downloads > 1 - throttleValue)
+                {
+                    Thread.Sleep(1);
+                }
             }
-           
+
         }
 
         //Descarga lista y strings
@@ -432,7 +476,6 @@ namespace YgoProEsPatcher
             await FileDownload("strings.conf", Path.Combine(YgoProEsPath.Text, "locales/es-ES"), Data.GetStringsWebsite(), true);
             await FileDownload("bot.conf", Path.Combine(YgoProEsPath.Text,"locales/es-ES"), Data.GetStringsWebsite(), true);
             progressBar.Invoke(new Action(() => { progressBar.Value = progressBar.Maximum; }));
-
             DownloadUsingCDB(CDBS, destinationFolder);
             YgoProEsCliente.DownloadBot(YgoProEsPath.Text);
         }

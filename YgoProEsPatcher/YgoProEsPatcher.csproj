@@ -65,11 +65,14 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.18.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.18\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="LibGit2Sharp, Version=0.26.0.0, Culture=neutral, PublicKeyToken=7cbde695407f0333, processorArchitecture=MSIL">
       <HintPath>..\packages\LibGit2Sharp.0.26.2\lib\net46\LibGit2Sharp.dll</HintPath>
     </Reference>
-    <Reference Include="Octokit, Version=0.36.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Octokit.0.36.0\lib\net46\Octokit.dll</HintPath>
+    <Reference Include="Octokit, Version=0.37.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Octokit.0.37.0\lib\net46\Octokit.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
